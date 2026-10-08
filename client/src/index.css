@@ -72,7 +72,7 @@ main.container { padding-bottom: 96px; }
 }
 
 /* 卡片网格 */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
 .card {
   position: relative; background: var(--surface); border-radius: var(--radius);
   overflow: hidden; box-shadow: var(--shadow); transition: transform 0.15s;
@@ -95,7 +95,7 @@ main.container { padding-bottom: 96px; }
   .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .card-body { padding: 8px 10px 10px; }
   .card-title { font-size: 1rem; }
-  .card-summary { display: none; }
+  .card-summary, .card-difficulty { display: none; }
   .card-meta { gap: 6px; font-size: 0.75rem; }
   .cover-placeholder { font-size: 2.6rem; }
   .order-toggle { top: 6px; right: 6px; padding: 2px 8px; font-size: 0.75rem; }

@@ -29,7 +29,7 @@ export default function RecipeCard({ recipe }) {
           <div className="card-meta">
             <span className="chip">{recipe.category}</span>
             {recipe.prepTime > 0 && <span>⏱ {recipe.prepTime} 分钟</span>}
-            {recipe.difficulty && <span>{recipe.difficulty}</span>}
+            {recipe.difficulty && <span className="card-difficulty">{recipe.difficulty}</span>}
           </div>
         </div>
       </Link>
