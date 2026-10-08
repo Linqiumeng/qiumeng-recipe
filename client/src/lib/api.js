@@ -13,6 +13,9 @@ async function request(path, { method = 'GET', body } = {}) {
   return data;
 }
 
+// 登录状态变化时广播，让顶栏等处更新
+export const AUTH_EVENT = 'auth-change';
+
 // 列表缓存：在首页和详情之间来回切换时不重复请求；后台增删改后清空
 let listCache = null;
 
@@ -39,8 +42,14 @@ export const api = {
   },
 
   me: () => request('/auth/me'),
-  login: (password) => request('/auth/login', { method: 'POST', body: { password } }),
-  logout: () => request('/auth/logout', { method: 'POST' }),
+  async login(password) {
+    await request('/auth/login', { method: 'POST', body: { password } });
+    window.dispatchEvent(new Event(AUTH_EVENT));
+  },
+  async logout() {
+    await request('/auth/logout', { method: 'POST' });
+    window.dispatchEvent(new Event(AUTH_EVENT));
+  },
 
   async uploadImage(file) {
     const sig = await request('/upload/signature');

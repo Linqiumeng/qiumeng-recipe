@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { CATEGORIES } from '../../../shared/categories.js';
-import { SITE_SUBTITLE } from '../config.js';
 import { api } from '../lib/api.js';
 import { useAsync } from '../lib/useAsync.js';
 import RecipeCard from '../components/RecipeCard.jsx';
@@ -43,34 +42,35 @@ export default function Home() {
 
   return (
     <>
-      <p className="subtitle">{SITE_SUBTITLE}</p>
-
       <div className="toolbar">
         <nav className="tabs" aria-label="分类">
-          {[{ name: ALL, emoji: '' }, ...CATEGORIES].map((c) => (
+          {[{ name: ALL, emoji: '🍽️' }, ...CATEGORIES].map((c) => (
             <button
               key={c.name}
               type="button"
               className={`tab ${category === c.name ? 'is-active' : ''}`}
               onClick={() => updateParam('category', c.name, ALL)}
             >
-              {c.emoji} {c.name}
+              <span className="tab-emoji" aria-hidden="true">{c.emoji}</span>
+              {c.name}
               <span className="tab-count">{counts[c.name] ?? 0}</span>
             </button>
           ))}
         </nav>
-        <input
-          type="search"
-          className="search"
-          placeholder="搜菜名、标签或食材，比如「土豆」"
-          value={q}
-          onChange={(e) => updateParam('q', e.target.value)}
-        />
+        <label className="search">
+          <span aria-hidden="true">🔍</span>
+          <input
+            type="search"
+            placeholder="搜菜名、标签或食材，比如「土豆」"
+            value={q}
+            onChange={(e) => updateParam('q', e.target.value)}
+          />
+        </label>
       </div>
 
       {loading && <p className="status">加载中…</p>}
       {error && <p className="status error">{error.message}</p>}
-      {recipes && visible.length === 0 && <p className="status">这里还没有菜，换个分类看看吧。</p>}
+      {recipes && visible.length === 0 && <p className="status">这里还没有菜，换个分类看看吧～</p>}
 
       <div className="grid">
         {visible.map((r) => (

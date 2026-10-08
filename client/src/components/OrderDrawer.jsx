@@ -34,29 +34,30 @@ export default function OrderDrawer() {
   return (
     <>
       <button type="button" className="order-fab" onClick={() => setOpen(true)}>
-        📝 点菜单 <span className="badge">{items.length}</span>
+        🧾 点菜单 <span className="badge">{items.length}</span>
       </button>
 
       {open && (
         <div className="drawer-backdrop" onClick={() => setOpen(false)}>
           <aside className="drawer" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-header">
-              <h2>点菜单</h2>
+              <h2>🧾 今天想吃</h2>
               <button type="button" className="modal-close" onClick={() => setOpen(false)} aria-label="关闭">
                 ×
               </button>
             </div>
 
             {items.length === 0 ? (
-              <p className="muted">还没有点菜，在卡片上点「＋ 点菜」试试。</p>
+              <p className="muted">还没有点菜，在卡片上点「♡ 想吃」试试～</p>
             ) : (
               <>
+                <p className="muted">复制下来发给我就好～</p>
                 <ol className="order-list">
                   {items.map((it) => (
                     <li key={it.slug}>
                       <span>{it.title}</span>
                       <button type="button" className="link-btn" onClick={() => remove(it.slug)}>
-                        移除
+                        不要了
                       </button>
                     </li>
                   ))}
