@@ -14,6 +14,7 @@
 | 技术栈 | MERN：React (Vite) + Express + MongoDB，纯 JavaScript，不用 TypeScript |
 | 界面语言 | 只做中文 |
 | 部署 | Vercel（前端 + Express 作为 Serverless 函数跑在 /api 下） |
+| 网址 | https://menu.linqiumeng.com（linqiumeng.com 的子域名） |
 | 数据库 | MongoDB Atlas 免费版 M0 |
 | 图片 | Cloudinary，浏览器直传（绕开 Vercel 4.5MB 请求体限制） |
 | 分类 | 每道菜必须属于一个分类：凉菜 / 荤菜 / 素菜 / 汤羹 / 主食 / 甜点小吃；另有自由标签 |
@@ -25,8 +26,8 @@
 
 ## 当前进度
 
-### ✅ 已完成（v1）
-- 首页：分类 Tab、搜索、卡片网格（手机端两列）
+### ✅ 已完成
+- 首页：分类 Tab、搜索、卡片网格（手机两列、平板三列、电脑四列）
 - 详情弹窗和独立详情页
 - 点菜单
 - 后台：登录、新增、编辑、删除菜谱，图片上传或粘贴链接
@@ -35,16 +36,35 @@
 - seed 脚本：从 scripts/seed-data/ 批量导入菜谱和图片，按菜名去重
 - 命令行管理脚本 scripts/recipe.js（见最后一节）
 - 本地测试已通过：登录、增删改、权限拦截、弹窗、点菜单、手机端布局、命令行脚本
+- 代码托管到 GitHub
+- MongoDB Atlas 已连接，导入了 6 道示例菜（另有自己加的黑椒牛肉，共 7 道）
+- 部署到 Vercel，绑定子域名 menu.linqiumeng.com，HTTPS 自动签发
+- 线上测试已通过：首页、详情链接、读取数据、权限拦截、后台登录，手机和平板布局
 
 ### ⏳ 未验证
 - Cloudinary 图片上传（还没有账号）
-- Vercel 线上部署
 
 ### 📋 待办
-1. 注册 MongoDB Atlas 和 Cloudinary，填写 .env
-2. 用自己的 12 道菜替换示例数据（照片放进 scripts/seed-data/images/，然后改写 recipes.json），运行 `npm run seed`
-3. 推到 GitHub，在 Vercel 导入仓库并配置环境变量，完成部署
-4. 确定网站名称（目前是占位的「我的私房菜谱」，在 client/src/config.js 里改）
+1. 注册 Cloudinary，把三项配置填进 .env 和 Vercel 环境变量（填完要在 Vercel 重新部署）
+2. 用自己的菜替换 6 道示例菜：示例菜用 `npm run recipe -- delete` 删除，自己的菜让 agent 整理后用 `add` 添加
+3. 确定网站名称（目前是占位的「我的私房菜谱」，在 client/src/config.js 里改）
+
+## 部署信息
+
+| 项目 | 值 |
+|---|---|
+| 正式网址 | https://menu.linqiumeng.com |
+| Vercel 默认网址 | https://qiumeng-recipe-client-three.vercel.app |
+| Vercel 项目名 | qiumeng-recipe-client |
+| GitHub 仓库 | https://github.com/Linqiumeng/qiumeng-recipe（main 分支） |
+| 域名 | linqiumeng.com 在 Vercel 购买，DNS 由 Vercel 自动管理 |
+| Vercel 环境变量 | MONGODB_URI、ADMIN_PASSWORD、JWT_SECRET（Cloudinary 待加） |
+
+更新方式：
+- 改代码：推送到 GitHub 的 main 分支，Vercel 自动部署
+- 增删菜谱：用后台或命令行脚本直接改数据库，不需要重新部署
+- 改环境变量：在 Vercel 改完后必须手动 Redeploy 才会生效
+- 注意：本地 .env 已经连接线上 Atlas，本地后台和脚本的改动会直接出现在线上
 
 ## 用 agent 管理菜谱
 
