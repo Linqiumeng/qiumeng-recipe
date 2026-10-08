@@ -4,3 +4,5 @@ dist/
 .data/
 .vercel/
 .DS_Store
+# agent 加菜时的草稿和预览（数据以数据库为准）
+scripts/drafts/

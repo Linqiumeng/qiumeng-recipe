@@ -2,6 +2,7 @@
 //
 //   npm run recipe -- list [分类]            列出所有菜（可按分类筛选）
 //   npm run recipe -- show <slug>            输出一道菜的完整 JSON（可另存后修改再 update）
+//   npm run recipe -- preview <文件.json>    只校验和查重，不写数据库；输出 Markdown 预览给人核对
 //   npm run recipe -- add <文件.json>        新增；文件里可以是一道菜，也可以是数组
 //   npm run recipe -- update <slug> <文件.json>  修改；只改文件里出现的字段
 //   npm run recipe -- delete <slug> [--yes]  删除；不加 --yes 只预览，不会真的删
@@ -21,6 +22,7 @@ const LOCAL_DEV_URI = 'mongodb://127.0.0.1:27018/recipes';
 const USAGE = `用法：
   npm run recipe -- list [分类]
   npm run recipe -- show <slug>
+  npm run recipe -- preview <文件.json>
   npm run recipe -- add <文件.json>
   npm run recipe -- update <slug> <文件.json>
   npm run recipe -- delete <slug> [--yes]`;
@@ -56,6 +58,26 @@ async function checkBeforeUpload(doc, raw, baseDir) {
   if (missing.length) throw new UserError(`找不到图片：${missing.join('、')}（路径相对于 JSON 文件所在目录）`);
 }
 
+// 把一道菜排版成易读的 Markdown，给人核对用
+function formatRecipe(r, n, issues) {
+  const meta = [
+    r.prepTime && `⏱ ${r.prepTime} 分钟`,
+    r.servings && `${r.servings} 人份`,
+    r.difficulty,
+    ...(r.tags ?? []).map((t) => `#${t}`),
+  ].filter(Boolean).join(' · ');
+  return [
+    `## ${n}. ${r.title} · ${r.category}`,
+    issues.length ? `\n> ⚠️ **${issues.join('；')}**` : '',
+    `\n> ${r.summary || '（没有简介）'}`,
+    meta && `\n${meta}`,
+    `\n**用料**：${(r.ingredients ?? []).map((i) => `${i.name} ${i.amount ?? ''}`.trim()).join('、')}`,
+    `\n**做法**\n${(r.steps ?? []).map((s, i) => `${i + 1}. ${s.text}${s.image ? `（配图：${s.image}）` : ''}`).join('\n')}`,
+    r.tips && `\n💡 ${r.tips}`,
+    r.coverImage && `\n🖼 封面：${r.coverImage}`,
+  ].filter(Boolean).join('\n');
+}
+
 const commands = {
   async list(category) {
     const filter = category ? { category } : {};
@@ -68,6 +90,35 @@ const commands = {
   async show(slug) {
     const recipe = await findBySlug(slug);
     console.log(JSON.stringify(pickEditable(recipe.toObject()), null, 2));
+  },
+
+  // 预览输出到 stdout（可以 > 到 .md 文件），校验结果输出到 stderr
+  async preview(file) {
+    const { data, baseDir } = readJson(file);
+    const items = Array.isArray(data) ? data : [data];
+    const seen = new Set();
+    const blocks = [];
+    let failed = 0;
+    for (const [i, raw] of items.entries()) {
+      const issues = [];
+      if (seen.has(raw.title)) issues.push('这批里重复了');
+      seen.add(raw.title);
+      if (await Recipe.exists({ title: raw.title })) issues.push('网站上已经有同名的菜');
+      try {
+        await checkBeforeUpload(new Recipe({ ...pickEditable(raw), slug: 'pending' }), raw, baseDir);
+      } catch (err) {
+        issues.push(errorMessage(err));
+      }
+      if (issues.length) failed++;
+      blocks.push(formatRecipe(raw, i + 1, issues));
+    }
+    console.log(blocks.join('\n\n---\n\n'));
+    if (failed) {
+      console.error(`✗ ${failed} / ${items.length} 道有问题，见预览里的 ⚠️`);
+      process.exitCode = 1;
+    } else {
+      console.error(`✓ ${items.length} 道全部通过校验，没有重名，可以 add`);
+    }
   },
 
   async add(file) {
