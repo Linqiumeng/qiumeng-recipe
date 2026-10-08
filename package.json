@@ -1,0 +1,32 @@
+{
+  "name": "recipe-site",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "node --watch --env-file-if-exists=.env server/dev.js",
+    "dev:web": "npm run dev -w client",
+    "build": "npm run build -w client",
+    "seed": "node --env-file-if-exists=.env scripts/seed.js",
+    "recipe": "node --env-file-if-exists=.env scripts/recipe.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.0",
+    "pinyin-pro": "^3.26.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "mongodb-memory-server": "^10.1.0"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "disablePostinstall": "1"
+    }
+  }
+}

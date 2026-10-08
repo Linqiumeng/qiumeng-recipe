@@ -1,0 +1,144 @@
+[
+  {
+    "title": "拍黄瓜",
+    "category": "凉菜",
+    "summary": "三分钟出锅的夏日开胃菜",
+    "coverImage": "",
+    "tags": ["快手", "开胃"],
+    "prepTime": 5,
+    "servings": 2,
+    "difficulty": "简单",
+    "ingredients": [
+      { "name": "黄瓜", "amount": "2 根" },
+      { "name": "蒜", "amount": "4 瓣" },
+      { "name": "生抽", "amount": "1 勺" },
+      { "name": "香醋", "amount": "2 勺" },
+      { "name": "香油", "amount": "少许" }
+    ],
+    "steps": [
+      { "text": "黄瓜洗净，用刀面拍裂后切成小段。" },
+      { "text": "蒜拍碎切末，和生抽、香醋、香油调成料汁。" },
+      { "text": "料汁倒在黄瓜上拌匀，腌 2 分钟即可。" }
+    ],
+    "tips": "拍比切更入味，别拍太碎。"
+  },
+  {
+    "title": "红烧肉",
+    "category": "荤菜",
+    "summary": "肥而不腻，入口即化",
+    "coverImage": "",
+    "tags": ["下饭", "宴客"],
+    "prepTime": 90,
+    "servings": 4,
+    "difficulty": "中等",
+    "ingredients": [
+      { "name": "五花肉", "amount": "500 克" },
+      { "name": "冰糖", "amount": "30 克" },
+      { "name": "生抽", "amount": "2 勺" },
+      { "name": "老抽", "amount": "1 勺" },
+      { "name": "料酒", "amount": "2 勺" },
+      { "name": "姜", "amount": "3 片" },
+      { "name": "八角", "amount": "2 个" }
+    ],
+    "steps": [
+      { "text": "五花肉切 3 厘米见方的块，冷水下锅焯水，捞出洗净。" },
+      { "text": "锅里少油，小火放冰糖炒到枣红色起泡。" },
+      { "text": "下肉块翻炒上色，加料酒、生抽、老抽、姜片、八角。" },
+      { "text": "加开水没过肉，大火烧开后转小火炖 1 小时。" },
+      { "text": "大火收汁到浓稠发亮即可。" }
+    ],
+    "tips": "炒糖色一定要小火，糖发苦就得重来。"
+  },
+  {
+    "title": "地三鲜",
+    "category": "素菜",
+    "summary": "东北经典，茄子土豆青椒一锅出",
+    "coverImage": "",
+    "tags": ["下饭"],
+    "prepTime": 25,
+    "servings": 3,
+    "difficulty": "简单",
+    "ingredients": [
+      { "name": "茄子", "amount": "1 根" },
+      { "name": "土豆", "amount": "1 个" },
+      { "name": "青椒", "amount": "1 个" },
+      { "name": "蒜", "amount": "3 瓣" },
+      { "name": "生抽", "amount": "1 勺" },
+      { "name": "蚝油", "amount": "1 勺" },
+      { "name": "淀粉", "amount": "1 小勺" }
+    ],
+    "steps": [
+      { "text": "茄子、土豆切滚刀块，青椒掰小块。" },
+      { "text": "土豆、茄子分别煎或炸到金黄，盛出。" },
+      { "text": "生抽、蚝油、淀粉加半碗水调成碗汁。" },
+      { "text": "蒜末爆香，下所有食材，倒碗汁大火翻匀收汁。" }
+    ],
+    "tips": "茄子先撒点盐腌 10 分钟挤掉水分，吸油会少很多。"
+  },
+  {
+    "title": "番茄蛋汤",
+    "category": "汤羹",
+    "summary": "酸甜开胃，十分钟一碗",
+    "coverImage": "",
+    "tags": ["快手"],
+    "prepTime": 10,
+    "servings": 2,
+    "difficulty": "简单",
+    "ingredients": [
+      { "name": "番茄", "amount": "2 个" },
+      { "name": "鸡蛋", "amount": "2 个" },
+      { "name": "葱花", "amount": "少许" },
+      { "name": "盐", "amount": "适量" }
+    ],
+    "steps": [
+      { "text": "番茄切块，少油炒出沙。" },
+      { "text": "加水烧开，调盐。" },
+      { "text": "鸡蛋打散，转圈淋入锅中，关火撒葱花。" }
+    ],
+    "tips": "淋蛋液时火要小，蛋花才会漂亮。"
+  },
+  {
+    "title": "蛋炒饭",
+    "category": "主食",
+    "summary": "剩饭的最好归宿",
+    "coverImage": "",
+    "tags": ["快手", "一人食"],
+    "prepTime": 10,
+    "servings": 1,
+    "difficulty": "简单",
+    "ingredients": [
+      { "name": "隔夜米饭", "amount": "1 碗" },
+      { "name": "鸡蛋", "amount": "2 个" },
+      { "name": "葱花", "amount": "少许" },
+      { "name": "盐", "amount": "适量" }
+    ],
+    "steps": [
+      { "text": "鸡蛋打散炒到半凝固，盛出。" },
+      { "text": "米饭下锅大火炒散。" },
+      { "text": "倒回鸡蛋，加盐和葱花翻匀出锅。" }
+    ],
+    "tips": "一定要用隔夜饭，新饭太湿会结团。"
+  },
+  {
+    "title": "双皮奶",
+    "category": "甜点小吃",
+    "summary": "顺德做法，奶香浓郁",
+    "coverImage": "",
+    "tags": ["甜品"],
+    "prepTime": 40,
+    "servings": 2,
+    "difficulty": "中等",
+    "ingredients": [
+      { "name": "全脂牛奶", "amount": "400 毫升" },
+      { "name": "蛋清", "amount": "2 个" },
+      { "name": "白糖", "amount": "25 克" }
+    ],
+    "steps": [
+      { "text": "牛奶加热到微沸倒入碗中，放凉形成奶皮。" },
+      { "text": "沿碗边划开奶皮，把牛奶倒出，奶皮留在碗底。" },
+      { "text": "牛奶加蛋清和白糖搅匀过筛，沿碗边缓缓倒回。" },
+      { "text": "盖保鲜膜，水开后中火蒸 15 分钟，关火焖 5 分钟。" }
+    ],
+    "tips": "倒奶液时要慢，让奶皮浮起来。"
+  }
+]
