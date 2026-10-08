@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { api } from './api.js';
 
 // 点菜单：只存在访客自己的浏览器里，不需要登录
 const STORAGE_KEY = 'order-list';
@@ -14,6 +15,17 @@ function loadItems() {
 
 export function OrderProvider({ children }) {
   const [items, setItems] = useState(loadItems);
+
+  // 点菜单存在访客浏览器里，菜被删掉或改名后要同步：删掉的移除，改名的更新菜名
+  useEffect(() => {
+    api
+      .listRecipes()
+      .then((recipes) => {
+        const titles = new Map(recipes.map((r) => [r.slug, r.title]));
+        setItems((prev) => prev.filter((i) => titles.has(i.slug)).map((i) => ({ ...i, title: titles.get(i.slug) })));
+      })
+      .catch(() => {}); // 列表加载失败时保留原样，不误删
+  }, []);
 
   useEffect(() => {
     try {
